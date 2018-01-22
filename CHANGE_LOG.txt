@@ -1,2 +1,8 @@
 v0.0.1:
   -Non-working initial save
+v0.0.2
+  -Non-working checkpoint
+  -configure "testing" & "template" directories
+  -add variable null check to option 4
+  -change exit case to "0"
+  -add actual configuration to systemd files

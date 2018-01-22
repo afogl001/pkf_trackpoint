@@ -1,0 +1,10 @@
+[Unit]
+Description=Trackpoint Configuration
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin//trackpoint.sh
+
+[Install]
+WantedBy=graphical.target
