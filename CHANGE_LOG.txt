@@ -6,3 +6,6 @@ v0.0.2
   -add variable null check to option 4
   -change exit case to "0"
   -add actual configuration to systemd files
+v1.0.0
+  -Remove redirections to testing directory
+  -Change main script's name
