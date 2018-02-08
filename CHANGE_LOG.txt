@@ -9,3 +9,5 @@ v0.0.2
 v1.0.0
   -Remove redirections to testing directory
   -Change main script's name
+v1.0.1
+  -Uncomment systemctl commands

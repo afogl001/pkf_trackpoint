@@ -36,9 +36,8 @@ case $vMainMenu in
   cp -r templates/trackpoint.service /etc/systemd/system
   cp -r templates/trackpoint.timer /etc/systemd/system
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
-  ##Uncomment systemctl commands after test validation
-  #systemctl start trackpoint
-  #systemctl enable trackpoint.timer
+  systemctl start trackpoint
+  systemctl enable trackpoint.timer
 ;;
 
 4 )
