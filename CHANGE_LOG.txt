@@ -13,3 +13,5 @@ v1.0.1
   -Uncomment systemctl commands
 v1.1.0
   -Add toggle to enable/disable test mode
+v1.1.1
+  -Fix README file
