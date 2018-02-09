@@ -13,9 +13,9 @@ read vMainMenu
 
 case $vMainMenu in
 1 )
-  printf "Trackpoint Sensitivity: " && cat testing/sys/devices/platform/i8042/serio1/serio2/sensitivity
-  printf "Trackpoint Speed: " && cat testing/sys/devices/platform/i8042/serio1/serio2/speed
-  printf "Trackpoint Press_To_Select: " && cat testing/sys/devices/platform/i8042/serio1/serio2/press_to_select
+  printf "Trackpoint Sensitivity: " && cat /sys/devices/platform/i8042/serio1/serio2/sensitivity
+  printf "Trackpoint Speed: " && cat /sys/devices/platform/i8042/serio1/serio2/speed
+  printf "Trackpoint Press_To_Select: " && cat /sys/devices/platform/i8042/serio1/serio2/press_to_select
   echo " "
 ;;
 
@@ -26,28 +26,28 @@ case $vMainMenu in
   read vSpeed
   echo "Press_to_Select:0-1"
   read vPress_to_Select
-  echo $vSensitivity > testing/sys/devices/platform/i8042/serio1/serio2/sensitivity
-  echo $vSpeed > testing/sys/devices/platform/i8042/serio1/serio2/speed
-  echo $vPress_to_Select > testing/sys/devices/platform/i8042/serio1/serio2/press_to_select
+  echo $vSensitivity > /sys/devices/platform/i8042/serio1/serio2/sensitivity
+  echo $vSpeed > /sys/devices/platform/i8042/serio1/serio2/speed
+  echo $vPress_to_Select > /sys/devices/platform/i8042/serio1/serio2/press_to_select
   echo " "
 ;;
 
 3 )
-  cp -r templates/trackpoint.service testing/etc/systemd/system
-  cp -r templates/trackpoint.timer testing/etc/systemd/system
-  cp -r templates/trackpoint.sh testing/usr/bin && chmod +x testing/usr/bin/trackpoint.sh
-  #systemctl start trackpoint
-  #systemctl enable trackpoint.timer
+  cp -r templates/trackpoint.service /etc/systemd/system
+  cp -r templates/trackpoint.timer /etc/systemd/system
+  cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+  systemctl start trackpoint
+  systemctl enable trackpoint.timer
 ;;
 
 4 )
 if [ ! -z "$vSensitivity" -a ! -z "$vSpeed" -a ! -z "$vPress_to_Select" ];
 then
   echo "#!/bin/bash" > templates/trackpoint.sh
-  echo "echo -n $vSensitivity > testing/sys/devices/platform/i8042/serio1/serio2/sensitivity" >> templates/trackpoint.sh
-  echo "echo -n $vSpeed > testing/sys/devices/platform/i8042/serio1/serio2/speed" >> templates/trackpoint.sh
-  echo "echo -n $vPress_to_Select > testing/sys/devices/platform/i8042/serio1/serio2/press_to_select" >> templates/trackpoint.sh
-  cp -r templates/trackpoint.sh testing/usr/bin && chmod +x testing/usr/bin/trackpoint.sh
+  echo "echo -n $vSensitivity > /sys/devices/platform/i8042/serio1/serio2/sensitivity" >> templates/trackpoint.sh
+  echo "echo -n $vSpeed > /sys/devices/platform/i8042/serio1/serio2/speed" >> templates/trackpoint.sh
+  echo "echo -n $vPress_to_Select > /sys/devices/platform/i8042/serio1/serio2/press_to_select" >> templates/trackpoint.sh
+  cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
 else
   echo "Settings not configured.  Please run \"Option 2:\" first"
   echo ""
