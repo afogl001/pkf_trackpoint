@@ -11,3 +11,5 @@ v1.0.0
   -Change main script's name
 v1.0.1
   -Uncomment systemctl commands
+v1.1.0
+  -Add toggle to enable/disable test mode
