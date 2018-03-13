@@ -15,8 +15,9 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
 
 ### Run "testing.sh" to check status and enable/disable test mode (for development)
 Turning on test mode will redirect configuration changes to the embedded "testing" directory.
+
 This can be useful for understanding what pkf_trackpoint is doing as well as assist in testing any changes
-  Displays current state of test mode.  
+  - Displays current state of test mode.  
   1. Switch between testing mode being on or off and exits
   0. Exit
 

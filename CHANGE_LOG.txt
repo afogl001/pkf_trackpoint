@@ -23,3 +23,5 @@ v1.2.0
   -Streamline newlines for main menu for pkf_trackpoint and testing
   -Add "Remove persistence" option
   -Update README
+v1.2.1
+  -Minor README fix
