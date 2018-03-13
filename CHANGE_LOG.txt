@@ -18,3 +18,8 @@ v1.1.1
 v1.1.2
   -Fix README file
   -Disable test mode
+v1.2.0
+  -Additional info in "Check Settings"
+  -Streamline newlines for main menu for pkf_trackpoint and testing
+  -Add "Remove persistence" option
+  -Update README

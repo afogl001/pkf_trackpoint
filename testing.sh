@@ -3,6 +3,7 @@
 while :
 do
 
+echo ""
 grep "testing/sys/devices" pkf_trackpoint.sh > /dev/null
 if [ $? -gt 0 ];
 then
