@@ -1,4 +1,10 @@
 #!/bin/bash
+if [ -d /sys/devices/platform/i8042/serio1/serio2 ];
+then
+  vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
+else
+  vTrackpointPath=/sys/devices/platform/i8042/serio1
+fi
 
 while :
 do
@@ -15,9 +21,9 @@ read vMainMenu
 
 case $vMainMenu in
 1 )
-  printf "Trackpoint Sensitivity: " && cat /sys/devices/platform/i8042/serio1/serio2/sensitivity
-  printf "Trackpoint Speed: " && cat /sys/devices/platform/i8042/serio1/serio2/speed
-  printf "Trackpoint Press_To_Select: " && cat /sys/devices/platform/i8042/serio1/serio2/press_to_select
+  printf "Trackpoint Sensitivity: " && cat $vTrackpointPath/sensitivity
+  printf "Trackpoint Speed: " && cat $vTrackpointPath/speed
+  printf "Trackpoint Press_To_Select: " && cat $vTrackpointPath/press_to_select
   if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.timer -a -f /usr/bin/trackpoint.sh ];
   then
     echo "Persistence: Enabled"
@@ -36,9 +42,9 @@ case $vMainMenu in
   read vSpeed
   echo "Press_to_Select:0-1"
   read vPress_to_Select
-  echo $vSensitivity > /sys/devices/platform/i8042/serio1/serio2/sensitivity
-  echo $vSpeed > /sys/devices/platform/i8042/serio1/serio2/speed
-  echo $vPress_to_Select > /sys/devices/platform/i8042/serio1/serio2/press_to_select
+  echo $vSensitivity > $vTrackpointPath/sensitivity
+  echo $vSpeed > $vTrackpointPath/speed
+  echo $vPress_to_Select > $vTrackpointPath/press_to_select
 ;;
 
 3 )
@@ -53,9 +59,15 @@ case $vMainMenu in
 if [ ! -z "$vSensitivity" -a ! -z "$vSpeed" -a ! -z "$vPress_to_Select" ];
 then
   echo "#!/bin/bash" > templates/trackpoint.sh
-  echo "echo -n $vSensitivity > /sys/devices/platform/i8042/serio1/serio2/sensitivity" >> templates/trackpoint.sh
-  echo "echo -n $vSpeed > /sys/devices/platform/i8042/serio1/serio2/speed" >> templates/trackpoint.sh
-  echo "echo -n $vPress_to_Select > /sys/devices/platform/i8042/serio1/serio2/press_to_select" >> templates/trackpoint.sh
+  echo "if [ -d /sys/devices/platform/i8042/serio1/serio2 ];" >> templates/trackpoint.sh
+  echo "then" >> templates/trackpoint.sh
+  echo "  vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2" >> templates/trackpoint.sh
+  echo "else" >> templates/trackpoint.sh
+  echo "  vTrackpointPath=/sys/devices/platform/i8042/serio1" >> templates/trackpoint.sh
+  echo "fi" >> templates/trackpoint.sh
+  echo "echo -n $vSensitivity > \$vTrackpointPath/sensitivity" >> templates/trackpoint.sh
+  echo "echo -n $vSpeed > \$vTrackpointPath/speed" >> templates/trackpoint.sh
+  echo "echo -n $vPress_to_Select > \$vTrackpointPath/press_to_select" >> templates/trackpoint.sh
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
 else
   echo "Settings not configured.  Please run \"Option 2:\" first"
