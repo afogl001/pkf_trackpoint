@@ -37,3 +37,4 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 ## TODO
   - Add support for SysV & Upstart
   - Use better systemd initiation (get rid of timer)
+  - Add reset defaults

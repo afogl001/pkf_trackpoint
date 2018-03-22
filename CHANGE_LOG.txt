@@ -38,3 +38,5 @@ v1.3.2
 v1.3.3
   -Fix testing.sh for trackpad testing
   -Change testing.sh trackpoint settings to OS defaults
+v1.3.4
+  -Add systemctl stop/daemon-reload to persistence removal
