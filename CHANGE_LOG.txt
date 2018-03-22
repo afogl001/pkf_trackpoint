@@ -35,3 +35,6 @@ v1.3.2
   -Fix typo in setting persistence
   -Set trackpoint.sh initial template to OS defaults
   -Update README with tested laptops
+v1.3.3
+  -Fix testing.sh for trackpad testing
+  -Change testing.sh trackpoint settings to OS defaults

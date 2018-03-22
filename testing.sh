@@ -4,7 +4,7 @@ while :
 do
 
 echo ""
-grep "testing/sys/devices" pkf_trackpoint.sh > /dev/null
+grep "testing/sys/devices" pkf_trackpoint.sh > /dev/null || grep "testing/sys/devices" templates/trackpoint.sh > /dev/null
 if [ $? -gt 0 ];
 then
   echo "Test mode: False"
@@ -38,6 +38,7 @@ case $vTestMenu in
     sed -i 's/\/etc\/systemd/testing\/etc\/systemd/g' pkf_trackpoint.sh
     sed -i 's/\/usr\/bin/testing\/usr\/bin/g' pkf_trackpoint.sh
     sed -i 's/systemctl/#systemctl/g' pkf_trackpoint.sh
+    sed -i 's/\/sys\/devices/testing\/sys\/devices/g' templates/trackpoint.sh
   fi
   if [ $vTestStatus = 1 ];
   then
@@ -45,6 +46,7 @@ case $vTestMenu in
     sed -i 's/testing\/etc\/systemd/\/etc\/systemd/g' pkf_trackpoint.sh
     sed -i 's/testing\/usr\/bin/\/usr\/bin/g' pkf_trackpoint.sh
     sed -i 's/#systemctl/systemctl/g' pkf_trackpoint.sh
+    sed -i 's/testing\/sys\/devices/\/sys\/devices/g' templates/trackpoint.sh
   fi
   exit
   ;;
@@ -53,15 +55,16 @@ case $vTestMenu in
   if [ $vTestTrackpad = 0 ];
   then
     mkdir testing/sys/devices/platform/i8042/serio1/serio2
-    echo "100" > testing/sys/devices/platform/i8042/serio1/serio2/sensitivity
-    echo "100" > testing/sys/devices/platform/i8042/serio1/serio2/speed
+    echo "128" > testing/sys/devices/platform/i8042/serio1/serio2/sensitivity
+    echo "92" > testing/sys/devices/platform/i8042/serio1/serio2/speed
     echo "0" > testing/sys/devices/platform/i8042/serio1/serio2/press_to_select
+
   fi
   if [ $vTestTrackpad = 1 ];
   then
     rm -r testing/sys/devices/platform/i8042/serio1/serio2
-    echo "100" > testing/sys/devices/platform/i8042/serio1/sensitivity
-    echo "100" > testing/sys/devices/platform/i8042/serio1/speed
+    echo "128" > testing/sys/devices/platform/i8042/serio1/sensitivity
+    echo "92" > testing/sys/devices/platform/i8042/serio1/speed
     echo "0" > testing/sys/devices/platform/i8042/serio1/press_to_select
   fi
   exit
