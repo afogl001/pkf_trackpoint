@@ -32,6 +32,5 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## TODO
-  - Add support with trackpad-less/disabled Thinkpads
   - Add support for SysV & Upstart
   - Use better systemd initiation (get rid of timer)

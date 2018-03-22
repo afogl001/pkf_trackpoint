@@ -49,8 +49,9 @@ case $vMainMenu in
 
 3 )
   cp -r templates/trackpoint.service /etc/systemd/system
-  cp -r templates/trackpoint.timer /etc/systemd/system
+  cp -r tempsystemctl daemon-reloadlates/trackpoint.timer /etc/systemd/system
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+  systemctl daemon-reload
   systemctl start trackpoint
   systemctl enable trackpoint.timer
 ;;

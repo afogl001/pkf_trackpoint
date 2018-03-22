@@ -25,3 +25,9 @@ v1.2.0
   -Update README
 v1.2.1
   -Minor README fix
+v1.3.0
+  -Add compatability with no/disabled trackpad devices
+  -Add testing toogle to add/remove trackpad paths.
+v1.3.1
+  -Remove trackpad-less TODO from README
+  -Add systemd reload when enabling persistence
