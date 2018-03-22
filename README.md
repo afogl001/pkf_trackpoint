@@ -31,6 +31,9 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /etc/systemd/system/trackpoint.timer
     + /usr/bin/trackpoint.sh
 
+## Tested on...
+  -OpenSUSE Leap 42 (T420)
+
 ## TODO
   - Add support for SysV & Upstart
   - Use better systemd initiation (get rid of timer)

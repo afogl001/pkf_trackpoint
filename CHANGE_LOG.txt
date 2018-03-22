@@ -31,3 +31,7 @@ v1.3.0
 v1.3.1
   -Remove trackpad-less TODO from README
   -Add systemd reload when enabling persistence
+v1.3.2
+  -Fix typo in setting persistence
+  -Set trackpoint.sh initial template to OS defaults
+  -Update README with tested laptops
