@@ -40,3 +40,5 @@ v1.3.3
   -Change testing.sh trackpoint settings to OS defaults
 v1.3.4
   -Add systemctl stop/daemon-reload to persistence removal
+v1.3.5
+  -Fix typo in systemctl stop for persistence removal
