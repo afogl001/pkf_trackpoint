@@ -42,3 +42,5 @@ v1.3.4
   -Add systemctl stop/daemon-reload to persistence removal
 v1.3.5
   -Fix typo in systemctl stop for persistence removal
+v1.4.0
+  -Add reset current Trackpoint settings to defaults

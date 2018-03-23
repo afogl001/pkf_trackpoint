@@ -15,6 +15,7 @@ echo "2: Set Trackpoint settings"
 echo "3: Setup systemd for persistent Trackpoint settings"
 echo "4: Make current Trackpoint settings persistent"
 echo "5: Remove Trackpoint persistent settings (use OS defaults)"
+echo "6: Set current Trackpoint settings back to OS defaults"
 echo "0: Exit"
 echo " "
 read vMainMenu
@@ -81,6 +82,12 @@ fi
   rm -f /etc/systemd/system/trackpoint.timer
   rm -f /usr/bin/trackpoint.sh
   systemctl daemon-reload
+;;
+
+6 )
+echo 128 > $vTrackpointPath/sensitivity
+echo 97 > $vTrackpointPath/speed
+echo 0 > $vTrackpointPath/press_to_select
 ;;
 
 0 | [eE]xit )
