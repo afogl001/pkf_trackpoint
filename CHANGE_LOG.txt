@@ -44,3 +44,6 @@ v1.3.5
   -Fix typo in systemctl stop for persistence removal
 v1.4.0
   -Add reset current Trackpoint settings to defaults
+v1.5.0
+  -Use path unit instead of timer unit
+  -Add conditional option to remove pre-v1.5 settings

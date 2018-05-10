@@ -11,6 +11,7 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
   3. Enable persistent settings (does not apply settings)
   4. Make current settings persistent
   5. Remove all pkf_trackpoint files from systemd
+  6. Sets trackpoint back to OS defaults (sensitivity=128, speed=97, press=0)
   0. Exit pkf_trackpoint
 
 ### Run "testing.sh" to check status and enable/disable test mode (for development)
@@ -36,5 +37,5 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## TODO
   - Add support for SysV & Upstart
-  - Use better systemd initiation (get rid of timer)
-  - Combine persistents setup and application to one option 
+  - Combine persistences setup and application to one option
+  - Ensure user is root when pkf_trackpoint is run
