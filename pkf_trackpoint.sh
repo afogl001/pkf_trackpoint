@@ -29,10 +29,10 @@ case $vMainMenu in
   printf "Trackpoint Sensitivity: " && cat $vTrackpointPath/sensitivity
   printf "Trackpoint Speed: " && cat $vTrackpointPath/speed
   printf "Trackpoint Press_To_Select: " && cat $vTrackpointPath/press_to_select
-  if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.timer -a -f /usr/bin/trackpoint.sh ];
+  if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.path -a -f /usr/bin/trackpoint.sh ];
   then
     echo "Persistence: Enabled"
-  elif [ ! -f /etc/systemd/system/trackpoint.service -a ! -f /etc/systemd/system/trackpoint.timer -a ! -f /usr/bin/trackpoint.sh ];
+  elif [ ! -f /etc/systemd/system/trackpoint.service -a ! -f /etc/systemd/system/trackpoint.path -a ! -f /usr/bin/trackpoint.sh ];
   then
     echo "Persistence: Disabled"
   else
@@ -54,11 +54,11 @@ case $vMainMenu in
 
 3 )
   cp -r templates/trackpoint.service /etc/systemd/system
-  cp -r templates/trackpoint.timer /etc/systemd/system
+  cp -r templates/trackpoint.path /etc/systemd/system
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
   systemctl daemon-reload
   systemctl start trackpoint
-  systemctl enable trackpoint.timer
+  systemctl enable trackpoint
 ;;
 
 4 )
@@ -86,7 +86,7 @@ fi
   rm -f /etc/systemd/system/trackpoint.path
   rm -f /usr/bin/trackpoint.sh
   ##Remove trackpoint.timer from pre-v1.5 versions
-  rm -f /etc/systemd/system/trackpoint.time
+  rm -f /etc/systemd/system/trackpoint.timer
   systemctl daemon-reload
 ;;
 

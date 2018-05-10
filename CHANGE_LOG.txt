@@ -47,3 +47,7 @@ v1.4.0
 v1.5.0
   -Use path unit instead of timer unit
   -Add conditional option to remove pre-v1.5 settings
+v1.5.1
+  -Fix type in timer removal in option 5
+  -Change timer to path in persistence check and option 3
+  -Change "enable" to "trackpoint" in option 3
