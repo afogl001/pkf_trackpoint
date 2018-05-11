@@ -1,3 +1,6 @@
+## *** This version (1.5) is abandoned as the path units in systemd do not work with pseudo-files (such as the /sys file system), making this implementation non-functional***
+## It is being left here for reference in the event that path units becomes compatible or another workaround for this implementation becomes available
+
 # pkf_trackpoint
 Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
   - Adjust sensitivity, speed, and touch-to-click on the fly (not persistent between reboots)

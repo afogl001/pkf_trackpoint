@@ -51,3 +51,5 @@ v1.5.1
   -Fix type in timer removal in option 5
   -Change timer to path in persistence check and option 3
   -Change "enable" to "trackpoint" in option 3
+v1.5.2
+  -Abandon
