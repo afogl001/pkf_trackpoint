@@ -39,3 +39,9 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
   - Add support for SysV & Upstart
   - Combine persistences setup and application to one option
   - Ensure user is root when pkf_trackpoint is run
+  - Find better initialization than timer
+  - Add/remove testing directory via testing.sh
+  - Add validation to values entered
+  - Make CHANGE_LOG a markdown file
+  - Initialize trackpoint variables with host's values
+  - Add option for "reset to previous settings"
