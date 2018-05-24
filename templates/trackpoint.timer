@@ -1,5 +1,5 @@
 [Unit]
-Description=Activiates trackpoint after boot
+Description=Activates trackpoint after boot
 
 [Timer]
 OnBootSec=10

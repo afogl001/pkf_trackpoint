@@ -42,3 +42,17 @@ v1.3.4
   -Add systemctl stop/daemon-reload to persistence removal
 v1.3.5
   -Fix typo in systemctl stop for persistence removal
+v1.4.0
+  -Add reset current Trackpoint settings to defaults
+v1.5.0
+  -Use path unit instead of timer unit
+  -Add conditional option to remove pre-v1.5 settings
+v1.5.1
+  -Fix type in timer removal in option 5
+  -Change timer to path in persistence check and option 3
+  -Change "enable" to "trackpoint" in option 3
+v1.4.1
+  -Revert back to v1.4
+  -Add condition triggers for systemd service
+v1.4.2
+  -Disable testing mode (left enabled by mistake)
