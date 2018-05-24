@@ -33,7 +33,7 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  -OpenSUSE Leap 42 (T420)
+  -OpenSUSE Leap 42 (W520)
 
 ## TODO
   - Add support for SysV & Upstart
