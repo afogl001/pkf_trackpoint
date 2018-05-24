@@ -34,6 +34,7 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## Tested on...
   -OpenSUSE Leap 42 (W520)
+  -Ubuntu 18.04 (W520)
 
 ## TODO
   - Add support for SysV & Upstart
