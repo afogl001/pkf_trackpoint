@@ -54,4 +54,5 @@ v1.5.1
 v1.4.1
   -Revert back to v1.4
   -Add condition triggers for systemd service
-  
+v1.4.2
+  -Disable testing mode (left enabled by mistake)

@@ -1,9 +1,9 @@
 #!/bin/bash
-if [ -d testing/sys/devices/platform/i8042/serio1/serio2 ];
+if [ -d /sys/devices/platform/i8042/serio1/serio2 ];
 then
-  vTrackpointPath=testing/sys/devices/platform/i8042/serio1/serio2
+  vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
 else
-  vTrackpointPath=testing/sys/devices/platform/i8042/serio1
+  vTrackpointPath=/sys/devices/platform/i8042/serio1
 fi
 
 while :
@@ -25,10 +25,10 @@ case $vMainMenu in
   printf "Trackpoint Sensitivity: " && cat $vTrackpointPath/sensitivity
   printf "Trackpoint Speed: " && cat $vTrackpointPath/speed
   printf "Trackpoint Press_To_Select: " && cat $vTrackpointPath/press_to_select
-  if [ -f testing/etc/systemd/system/trackpoint.service -a -f testing/etc/systemd/system/trackpoint.timer -a -f testing/usr/bin/trackpoint.sh ];
+  if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.timer -a -f /usr/bin/trackpoint.sh ];
   then
     echo "Persistence: Enabled"
-  elif [ ! -f testing/etc/systemd/system/trackpoint.service -a ! -f testing/etc/systemd/system/trackpoint.timer -a ! -f testing/usr/bin/trackpoint.sh ];
+  elif [ ! -f /etc/systemd/system/trackpoint.service -a ! -f /etc/systemd/system/trackpoint.timer -a ! -f /usr/bin/trackpoint.sh ];
   then
     echo "Persistence: Disabled"
   else
@@ -49,39 +49,39 @@ case $vMainMenu in
 ;;
 
 3 )
-  cp -r templates/trackpoint.service testing/etc/systemd/system
-  cp -r templates/trackpoint.timer testing/etc/systemd/system
-  cp -r templates/trackpoint.sh testing/usr/bin && chmod +x testing/usr/bin/trackpoint.sh
-  #systemctl daemon-reload
-  #systemctl start trackpoint
-  #systemctl enable trackpoint.timer
+  cp -r templates/trackpoint.service /etc/systemd/system
+  cp -r templates/trackpoint.timer /etc/systemd/system
+  cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+  systemctl daemon-reload
+  systemctl start trackpoint
+  systemctl enable trackpoint.timer
 ;;
 
 4 )
 if [ ! -z "$vSensitivity" -a ! -z "$vSpeed" -a ! -z "$vPress_to_Select" ];
 then
   echo "#!/bin/bash" > templates/trackpoint.sh
-  echo "if [ -d testing/sys/devices/platform/i8042/serio1/serio2 ];" >> templates/trackpoint.sh
+  echo "if [ -d /sys/devices/platform/i8042/serio1/serio2 ];" >> templates/trackpoint.sh
   echo "then" >> templates/trackpoint.sh
-  echo "  vTrackpointPath=testing/sys/devices/platform/i8042/serio1/serio2" >> templates/trackpoint.sh
+  echo "  vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2" >> templates/trackpoint.sh
   echo "else" >> templates/trackpoint.sh
-  echo "  vTrackpointPath=testing/sys/devices/platform/i8042/serio1" >> templates/trackpoint.sh
+  echo "  vTrackpointPath=/sys/devices/platform/i8042/serio1" >> templates/trackpoint.sh
   echo "fi" >> templates/trackpoint.sh
   echo "echo -n $vSensitivity > \$vTrackpointPath/sensitivity" >> templates/trackpoint.sh
   echo "echo -n $vSpeed > \$vTrackpointPath/speed" >> templates/trackpoint.sh
   echo "echo -n $vPress_to_Select > \$vTrackpointPath/press_to_select" >> templates/trackpoint.sh
-  cp -r templates/trackpoint.sh testing/usr/bin && chmod +x testing/usr/bin/trackpoint.sh
+  cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
 else
   echo "Settings not configured.  Please run \"Option 2:\" first"
 fi
 ;;
 
 5 )
-  #systemctl stop trackpoint
-  rm -f testing/etc/systemd/system/trackpoint.service
-  rm -f testing/etc/systemd/system/trackpoint.timer
-  rm -f testing/usr/bin/trackpoint.sh
-  #systemctl daemon-reload
+  systemctl stop trackpoint
+  rm -f /etc/systemd/system/trackpoint.service
+  rm -f /etc/systemd/system/trackpoint.timer
+  rm -f /usr/bin/trackpoint.sh
+  systemctl daemon-reload
 ;;
 
 6 )
