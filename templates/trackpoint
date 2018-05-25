@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Description: Trackpoint Configuration for Sys V
+
+start() {
+/usr/bin/trackpoint.sh
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    echo "Stop not supported.  Disable with pkf_trackpoint script"
+    ;;
+  restart)
+    echo "Restart not supported.  Re-run pkf_trackpoint script"
+    ;;
+  *)
+    echo "Usage: $0 {start}"
+esac
+
+exit 0

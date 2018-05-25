@@ -56,3 +56,8 @@ v1.4.1
   -Add condition triggers for systemd service
 v1.4.2
   -Disable testing mode (left enabled by mistake)
+v1.5.0
+  -Removed due to missing features for systemd's path unit 
+v1.6.0
+  -Add Sys V init for Debian based distros
+  -Add complete addition/removal of testing directory in test toggle
