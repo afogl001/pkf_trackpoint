@@ -20,6 +20,7 @@ Turning on test mode will redirect configuration changes to the embedded "testin
 This can be useful for understanding what pkf_trackpoint is doing as well as assist in testing any changes
   - Displays current state of test mode.  
   1. Switch between testing mode being on or off and exits
+  2. Toggles whether a fake trackpad exists or not
   0. Exit
 
 ## Files created/modified
@@ -28,20 +29,19 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /sys/devices/platform/i8042/serio1/serio2/speed
     + /sys/devices/platform/i8042/serio1/serio2/press_to_select
   - Files that remain between reboots (if using persistent settings)
-    + /etc/systemd/system/trackpoint.service
-    + /etc/systemd/system/trackpoint.timer
+    + /etc/systemd/system/trackpoint.service (systemd)
+    + /etc/systemd/system/trackpoint.timer (systemd)
+    + /etc/init.d/trackpoint (SysV)
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  - OpenSUSE Leap 42 (W520)
-  - Ubuntu 18.04 (W520)
+  - N/A
 
 ## TODO
-  - Add support for SysV & Upstart
+  - Add support for SysV (non-Debian) & Upstart
   - Combine persistences setup and application to one option
   - Ensure user is root when pkf_trackpoint is run
   - Find better initialization than timer
-  - Add/remove testing directory via testing.sh
   - Add validation to values entered
   - Make CHANGE_LOG a markdown file
   - Initialize trackpoint variables with host's values

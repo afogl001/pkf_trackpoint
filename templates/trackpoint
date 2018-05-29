@@ -1,0 +1,31 @@
+#!/bin/bash
+
+### BEGIN INIT INFO
+# Provides:		/usr/bin/trackpoint.sh
+# Required-Start:
+# Required-Stop:
+# Default-Start:	5
+# Default-Stop:		0 1 2 3 4 6
+# Short-Descriptoin:	Sets trackpoint settings on boot
+# Description: Set trackpoint configuration for Sys V on graphical desktop
+### END INIT INFO
+
+start() {
+/usr/bin/trackpoint.sh
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    echo "Stop not supported.  Disable with pkf_trackpoint script"
+    ;;
+  restart)
+    echo "Restart not supported.  Re-run pkf_trackpoint script"
+    ;;
+  *)
+    echo "Usage: $0 {start}"
+esac
+
+exit 0

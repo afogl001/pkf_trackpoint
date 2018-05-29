@@ -1,9 +1,20 @@
 #!/bin/bash
+
+# Set trackpoint paths based on existence of trackpad
 if [ -d /sys/devices/platform/i8042/serio1/serio2 ];
 then
   vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
 else
   vTrackpointPath=/sys/devices/platform/i8042/serio1
+fi
+
+# Check if OS is using systemd
+systemctl --version &> /dev/null
+if [ $? != 0 ];
+then
+  vInitSystem=sysv
+else
+  vInitSystem=systemd
 fi
 
 while :
@@ -12,7 +23,7 @@ do
 echo ""
 echo "1: Check current Trackpoint settings"
 echo "2: Set Trackpoint settings"
-echo "3: Setup systemd for persistent Trackpoint settings"
+echo "3: Setup persistent Trackpoint settings"
 echo "4: Make current Trackpoint settings persistent"
 echo "5: Remove Trackpoint persistent settings (use OS defaults)"
 echo "6: Set current Trackpoint settings back to OS defaults"
@@ -25,14 +36,28 @@ case $vMainMenu in
   printf "Trackpoint Sensitivity: " && cat $vTrackpointPath/sensitivity
   printf "Trackpoint Speed: " && cat $vTrackpointPath/speed
   printf "Trackpoint Press_To_Select: " && cat $vTrackpointPath/press_to_select
-  if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.timer -a -f /usr/bin/trackpoint.sh ];
+  # Check status of persistence depending on init system
+  if [ $vInitSystem = sysv ];
   then
-    echo "Persistence: Enabled"
-  elif [ ! -f /etc/systemd/system/trackpoint.service -a ! -f /etc/systemd/system/trackpoint.timer -a ! -f /usr/bin/trackpoint.sh ];
-  then
-    echo "Persistence: Disabled"
+    if [ -f /etc/init.d/trackpoint -a -f /usr/bin/trackpoint.sh ];
+    then
+      echo "Persistence: Enabled (SysV)"
+    elif [ ! -f /etc/init.d/trackpoint -a ! -f /usr/bin/trackpoint.sh ];
+    then
+      echo "Persistence: Disabled (SysV)"
+    else
+      echo "Persistence: Broken.  Use option 3 or 5 to fix"
+    fi
   else
-    echo "Persistence: Broken.  Use option 3 or 5 to fix"
+    if [ -f /etc/systemd/system/trackpoint.service -a -f /etc/systemd/system/trackpoint.timer -a -f /usr/bin/trackpoint.sh ];
+    then
+      echo "Persistence: Enabled (systemd)"
+    elif [ ! -f /etc/systemd/system/trackpoint.service -a ! -f /etc/systemd/system/trackpoint.timer -a ! -f /usr/bin/trackpoint.sh ];
+    then
+      echo "Persistence: Disabled (systemd)"
+    else
+      echo "Persistence: Broken.  Use option 3 or 5 to fix"
+    fi
   fi
 ;;
 
@@ -49,12 +74,19 @@ case $vMainMenu in
 ;;
 
 3 )
-  cp -r templates/trackpoint.service /etc/systemd/system
-  cp -r templates/trackpoint.timer /etc/systemd/system
-  cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
-  systemctl daemon-reload
-  systemctl start trackpoint
-  systemctl enable trackpoint.timer
+  if [ $vInitSystem = sysv ];
+  then
+    cp -r templates/trackpoint /etc/init.d && chmod +x /etc/init.d/trackpoint
+    cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+    update-rc.d trackpoint start 90 5 . stop 90 0 1 2 3 4 6 . > /dev/null
+  else
+    cp -r templates/trackpoint.service /etc/systemd/system
+    cp -r templates/trackpoint.timer /etc/systemd/system
+    cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+    systemctl daemon-reload
+    systemctl start trackpoint
+    systemctl enable trackpoint.timer
+  fi
 ;;
 
 4 )
@@ -77,12 +109,21 @@ fi
 ;;
 
 5 )
-  systemctl stop trackpoint
-  rm -f /etc/systemd/system/trackpoint.service
-  rm -f /etc/systemd/system/trackpoint.timer
-  rm -f /usr/bin/trackpoint.sh
-  systemctl daemon-reload
+  if [ $vInitSystem = sysv ];
+  then
+    update-rc.d -f trackpoint remove
+    rm -f /etc/init.d/trackpoint
+    rm -f /usr/bin/trackpoint.sh
+  else
+    systemctl disable trackpoint.timer
+    systemctl stop trackpoint > /dev/null  # Output hidden since it warns about service being called by timer, but timer and service are removed below
+    rm -f /etc/systemd/system/trackpoint.service
+    rm -f /etc/systemd/system/trackpoint.timer
+    rm -f /usr/bin/trackpoint.sh
+    systemctl daemon-reload
+  fi
 ;;
+
 
 6 )
 echo 128 > $vTrackpointPath/sensitivity
