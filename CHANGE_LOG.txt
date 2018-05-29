@@ -65,3 +65,6 @@ v1.6.1
   -Make Sys V init only run at level 5
   -Add LSB info to Sys V script
   -Update menu text in pkf_trackpoint
+v1.6.2
+  -Allow output of persistence setting but hide systemd service stop (non-applicable warning about being called by timer)
+  

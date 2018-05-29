@@ -111,11 +111,12 @@ fi
 5 )
   if [ $vInitSystem = sysv ];
   then
-    update-rc.d -f trackpoint remove >> /dev/null
+    update-rc.d -f trackpoint remove
     rm -f /etc/init.d/trackpoint
     rm -f /usr/bin/trackpoint.sh
   else
-    systemctl stop trackpoint
+    systemctl disable trackpoint.timer
+    systemctl stop trackpoint > /dev/null  # Output hidden since it warns about service being called by timer, but timer and service are removed below
     rm -f /etc/systemd/system/trackpoint.service
     rm -f /etc/systemd/system/trackpoint.timer
     rm -f /usr/bin/trackpoint.sh
