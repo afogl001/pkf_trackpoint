@@ -35,7 +35,8 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  - N/A
+  - OpenSUSE Leap 42.3 (W540)
+  - Trisquel 7 Live-USB only (W540)
 
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
