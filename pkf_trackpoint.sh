@@ -23,7 +23,7 @@ do
 echo ""
 echo "1: Check current Trackpoint settings"
 echo "2: Set Trackpoint settings"
-echo "3: Setup systemd for persistent Trackpoint settings"
+echo "3: Setup persistent Trackpoint settings"
 echo "4: Make current Trackpoint settings persistent"
 echo "5: Remove Trackpoint persistent settings (use OS defaults)"
 echo "6: Set current Trackpoint settings back to OS defaults"
@@ -78,7 +78,7 @@ case $vMainMenu in
   then
     cp -r templates/trackpoint /etc/init.d && chmod +x /etc/init.d/trackpoint
     cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
-    update-rc.d trackpoint defaults
+    update-rc.d trackpoint start 90 5 . stop 90 0 1 2 3 4 6 . > /dev/null
   else
     cp -r templates/trackpoint.service /etc/systemd/system
     cp -r templates/trackpoint.timer /etc/systemd/system
@@ -111,7 +111,7 @@ fi
 5 )
   if [ $vInitSystem = sysv ];
   then
-    update-rc.d -f trackpoint remove
+    update-rc.d -f trackpoint remove >> /dev/null
     rm -f /etc/init.d/trackpoint
     rm -f /usr/bin/trackpoint.sh
   else

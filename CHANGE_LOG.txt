@@ -57,7 +57,11 @@ v1.4.1
 v1.4.2
   -Disable testing mode (left enabled by mistake)
 v1.5.0
-  -Removed due to missing features for systemd's path unit 
+  -Removed due to missing features for systemd's path unit
 v1.6.0
   -Add Sys V init for Debian based distros
   -Add complete addition/removal of testing directory in test toggle
+v1.6.1
+  -Make Sys V init only run at level 5
+  -Add LSB info to Sys V script
+  -Update menu text in pkf_trackpoint
