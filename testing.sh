@@ -4,7 +4,7 @@ while :
 do
 
 echo ""
-grep "testing/sys/devices" pkf_trackpoint.sh > /dev/null || grep "testing/sys/devices" templates/trackpoint.sh > /dev/null
+grep "testing/" pkf_trackpoint.sh > /dev/null || grep "testing/" templates/trackpoint.sh > /dev/null
 if [ $? -gt 0 ];
 then
   echo "Test mode: False"
@@ -60,6 +60,9 @@ case $vTestMenu in
     sed -i 's/#systemctl/systemctl/g' pkf_trackpoint.sh  #Uncomment systemd commands
     sed -i 's/#update-rc.d/update-rc.d/g' pkf_trackpoint.sh  #Uncomment update-rc commands
     sed -i 's/testing\/sys\/devices/\/sys\/devices/g' templates/trackpoint.sh  #Unset "/sys/devices" path from test mode
+    sed -i "/vSensitivity=/c\vSensitivity=128" templates/trackpoint.sh
+    sed -i "/vSpeed=/c\vSpeed=92" templates/trackpoint.sh
+    sed -i "/vPress_to_Select=/c\vPress_to_Select=0" templates/trackpoint.sh
     rm -rf testing
   fi
   exit
