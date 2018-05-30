@@ -75,3 +75,5 @@
   + Add missing command to apply changes if re-running Option 4 (applying current settings to persistence )
   + Fix SysV output being hidden when using Option 3 (setting up persistence)
   + Update CHANGELOG
+- v1.7.2
+  + Remove command to start trackpoint.sh in Option 4 (redundant since settings already applied in Option 2)

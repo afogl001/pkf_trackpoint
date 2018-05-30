@@ -100,7 +100,6 @@ then
   sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
   sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
-  /usr/bin/trackpoint.sh start  # Apply updates to script 
 else
   echo "Settings not configured.  Please run \"Option 2:\" first"
 fi
