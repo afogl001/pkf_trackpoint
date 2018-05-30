@@ -82,7 +82,7 @@ case $vMainMenu in
   then
     cp -r templates/trackpoint /etc/init.d && chmod +x /etc/init.d/trackpoint
     cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
-    update-rc.d trackpoint start 90 5 . stop 90 0 1 2 3 4 6 . > /dev/null
+    update-rc.d trackpoint start 90 5 . stop 90 0 1 2 3 4 6 .
   else
     cp -r templates/trackpoint.service /etc/systemd/system
     cp -r templates/trackpoint.timer /etc/systemd/system
@@ -100,6 +100,7 @@ then
   sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
   sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
+  /usr/bin/trackpoint.sh start  # Apply updates to script 
 else
   echo "Settings not configured.  Please run \"Option 2:\" first"
 fi

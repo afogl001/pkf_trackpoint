@@ -18,7 +18,8 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
 Turning on test mode will redirect configuration changes to the embedded "testing" directory.
 
 This can be useful for understanding what pkf_trackpoint is doing as well as assist in testing any changes
-  - Displays current state of test mode.  
+  - Displays current state of test mode.
+  - Displays whether fake trackpad exists 
   1. Switch between testing mode being on or off
   2. Toggles whether a fake trackpad exists or not
   0. Exit
