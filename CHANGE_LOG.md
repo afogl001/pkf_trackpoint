@@ -67,7 +67,7 @@
   - Update menu text in pkf_trackpoint
 ### v1.6.2
   - Allow output of persistence setting but hide systemd service stop (non-applicable warning about being called by timer)
-###v1.7.0
+### v1.7.0
   - Enable stop/restart for persistence settings
   - Add conditional to trackpad detection for if neither exists (exit 200)
   - Reset default setting values in trackpoint.sh when disabling test mode
