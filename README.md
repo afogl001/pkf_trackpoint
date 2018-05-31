@@ -37,7 +37,7 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## Tested on...
   - OpenSuse Leap 42 (W520)
-  - Trisquel, Live-USB only (W520)
+  - Trisquel 7, Live-USB only (W520)
 
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
