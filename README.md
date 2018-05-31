@@ -19,7 +19,7 @@ Turning on test mode will redirect configuration changes to the embedded "testin
 
 This can be useful for understanding what pkf_trackpoint is doing as well as assist in testing any changes
   - Displays current state of test mode.
-  - Displays whether fake trackpad exists 
+  - Displays whether fake trackpad exists
   1. Switch between testing mode being on or off
   2. Toggles whether a fake trackpad exists or not
   0. Exit
@@ -36,7 +36,8 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  - N/A
+  - OpenSuse Leap 42 (W520)
+  - Trisquel, Live-USB only (W520)
 
 ## TODO
   - Add support for SysV (non-Debian) & Upstart

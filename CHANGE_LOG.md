@@ -77,3 +77,5 @@
   + Update CHANGELOG
 - v1.7.2
   + Remove command to start trackpoint.sh in Option 4 (redundant since settings already applied in Option 2)
+- v1.7.3
+  + Add initially tested OS/Laptops to README
