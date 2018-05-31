@@ -10,7 +10,7 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
   2. Apply trackpoint settings on the fly
   3. Enable persistent settings (does not apply settings)
   4. Make current settings persistent
-  5. Remove all pkf_trackpoint files from systemd
+  5. Remove all pkf_trackpoint files from initialization daemon
   6. Sets trackpoint back to OS defaults (sensitivity=128, speed=97, press=0)
   0. Exit pkf_trackpoint
 
@@ -18,8 +18,9 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
 Turning on test mode will redirect configuration changes to the embedded "testing" directory.
 
 This can be useful for understanding what pkf_trackpoint is doing as well as assist in testing any changes
-  - Displays current state of test mode.  
-  1. Switch between testing mode being on or off and exits
+  - Displays current state of test mode.
+  - Displays whether fake trackpad exists
+  1. Switch between testing mode being on or off
   2. Toggles whether a fake trackpad exists or not
   0. Exit
 
@@ -35,8 +36,8 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  - OpenSUSE Leap 42.3 (W540)
-  - Trisquel 7 Live-USB only (W540)
+  - OpenSuse Leap 42 (W520)
+  - Trisquel 7, Live-USB only (W520)
 
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
@@ -44,6 +45,5 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
   - Ensure user is root when pkf_trackpoint is run
   - Find better initialization than timer
   - Add validation to values entered
-  - Make CHANGE_LOG a markdown file
   - Initialize trackpoint variables with host's values
   - Add option for "reset to previous settings"
