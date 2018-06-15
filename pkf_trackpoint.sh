@@ -1,16 +1,28 @@
 #!/bin/bash
 
+## Ensure script is being run as root
+if ! [ $(id -u) = 0 ]; then
+   echo "Pleaes run this script as root"
+   exit 100
+fi
+
 ## Determine and set correct path for trackpoint
-if [ -d /sys/devices/platform/i8042/serio1/serio2 ];
+if [ -f /sys/devices/platform/i8042/serio1/serio2/sensitivity ];
 then
   vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
-elif [ -d /sys/devices/platform/i8042/serio1 ];
+elif [ -f /sys/devices/platform/i8042/serio1/sensitivity ];
 then
   vTrackpointPath=/sys/devices/platform/i8042/serio1
 else
   echo "Trackpoint not detected"
   exit 200
 fi
+
+
+## Initialize trackpoint varialbes with current values
+vSensitivity=$(<$vTrackpointPath/sensitivity)
+vSpeed=$(<$vTrackpointPath/speed)
+vPress_to_Select=$(<$vTrackpointPath/press_to_select)
 
 ## Check if OS is using systemd
 systemctl --version &> /dev/null
@@ -66,12 +78,31 @@ case $vMainMenu in
 ;;
 
 2 )
-  echo "Sensitivity:1-255"
-  read vSensitivity
-  echo "Speed:1-255"
-  read vSpeed
-  echo "Press_to_Select:0-1"
-  read vPress_to_Select
+  printf "Sensitivity (1-255): Currently " && cat $vTrackpointPath/sensitivity
+  read vTempSensitivity
+  if [ "$vTempSensitivity" -lt 1 -o "$vTempSensitivity" -gt 255 ];
+  then
+    echo "Please enter a value between 1 and 255"
+    continue
+  fi
+  printf "Speed (1-255): Currently " && cat $vTrackpointPath/speed
+  read vTempSpeed
+  if [ "$vTempSpeed" -lt 1 -o "$vTempSpeed" -gt 255 ];
+  then
+    echo "Please enter a value between 1 and 255"
+    continue
+  fi
+  printf "Press_to_Select (0-1): Currently " && cat $vTrackpointPath/press_to_select
+  read vTempPress_to_Select
+  if [[ "$vTempPress_to_Select" != [0-1] ]];
+  then
+    echo "Please enter either 0 (disabled) or 1 (enabled)"
+    continue
+  fi
+  ## Since all values are valid, assign to corrisponding variables
+  vSensitivity=$vTempSensitivity
+  vSpeed=$vTempSpeed
+  vPress_to_Select=$vTempPress_to_Select
   echo $vSensitivity > $vTrackpointPath/sensitivity
   echo $vSpeed > $vTrackpointPath/speed
   echo $vPress_to_Select > $vTrackpointPath/press_to_select
