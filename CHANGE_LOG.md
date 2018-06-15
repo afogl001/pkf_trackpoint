@@ -86,3 +86,7 @@
     + Display current corresponding trackpoint setting when setting new values
     + Add better detection of trackpoint existence
     + Initialize trackpoint variables with current setting values
+  - v1.8.1
+    + Fix missing validation of persistence before applying option 4 (apply current settings to persistence)
+    + Fix redirection of systemd warnings when disabling persistence (can be safely ignored as timer unit is also deleted)
+    + Tweak persistence detection and reporting

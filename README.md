@@ -36,7 +36,7 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  - 
+  -
 
 ## Exit codes
   - 100: Script not run as root (required since system file are being changed)
@@ -44,8 +44,9 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## Variables used
   - vTrackpointPath = Path to Trackpoint settings. Varies based on existence of a trackpad ( sys/devices/platform/i8042/serio1 | sys/devices/platform/i8042/serio1/serio2 )
-  - vMainMenu = Selected option from menu ( [0-6] )
   - vInitSystem = Detected initialization service used ( sysv | systemd )
+  - vInitStatus = Current status of persistence ( Enabled | Disabled | Broken. Use Option 3 or 5)
+  - vMainMenu = Selected option from menu ( [0-6] )
   - vTempSensitivity = Pre-vallidation value for sensitivity setting ( [1-255] )
   - vTempSpeed = Pre-vallidation value for speed setting ( [1-255] )
   - vTempPress_to_Select = Pre-vallidation value for press_to_select setting ( [0-1] )
@@ -55,7 +56,4 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
-  - Ensure user is root when pkf_trackpoint is run
-  - Find better initialization than timer
-  - Initialize trackpoint variables with host's values
-  - Add option for "reset to previous settings"
+  - Find better initialization than timer for systemd
