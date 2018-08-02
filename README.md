@@ -36,7 +36,8 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /usr/bin/trackpoint.sh
 
 ## Tested on...
-  -
+  - OpenSUSE Leap 42 (Thinkpad W520)
+  - Ubuntu 18.04 (Thinkpad W520)
 
 ## Exit codes
   - 100: Script not run as root (required since system file are being changed)
