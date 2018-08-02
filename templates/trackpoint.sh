@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ## Determine and set correct path for trackpoint
-if [ -d /sys/devices/platform/i8042/serio1/serio2 ];
+if [ -f /sys/devices/platform/i8042/serio1/serio2/sensitivity ];
 then
   vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
-elif [ -d /sys/devices/platform/i8042/serio1 ];
+elif [ -f /sys/devices/platform/i8042/serio1/sensitivity ];
 then
   vTrackpointPath=/sys/devices/platform/i8042/serio1
 else

@@ -79,3 +79,15 @@
   + Remove command to start trackpoint.sh in Option 4 (redundant since settings already applied in Option 2)
 - v1.7.3
   + Add initially tested OS/Laptops to README
+##### v1.8.0
+    + Add check for root user
+    + Add validation of setting values
+    + Prevent using values entered if any are not valid
+    + Display current corresponding trackpoint setting when setting new values
+    + Add better detection of trackpoint existence
+    + Initialize trackpoint variables with current setting values
+  - v1.8.1
+    + Fix missing validation of persistence before applying option 4 (apply current settings to persistence)
+    + Fix redirection of systemd warnings when disabling persistence (can be safely ignored as timer unit is also deleted)
+    + Tweak persistence detection and reporting
+    + Change systemd timer from "OnBootSec" to "OnActiveSec"
