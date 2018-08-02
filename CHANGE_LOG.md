@@ -90,3 +90,4 @@
     + Fix missing validation of persistence before applying option 4 (apply current settings to persistence)
     + Fix redirection of systemd warnings when disabling persistence (can be safely ignored as timer unit is also deleted)
     + Tweak persistence detection and reporting
+    + Change systemd timer from "OnBootSec" to "OnActiveSec"

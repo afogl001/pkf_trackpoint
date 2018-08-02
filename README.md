@@ -57,3 +57,4 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
   - Find better initialization than timer for systemd
+  - Change systemd timmer to "OnActiveSec" instead of "OnBootSec"
