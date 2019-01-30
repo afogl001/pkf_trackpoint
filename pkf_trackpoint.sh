@@ -15,7 +15,7 @@ then
   vTrackpointPath=/sys/devices/platform/i8042/serio1
 elif [ -f /sys/devices/rmi4-00/rmi4-00.fn03/serio2/sensitivity ];
 then
-  vTrackpointPath=/sys/devices/serio2/rmi4-00/rmi4-00.fn03
+  vTrackpointPath=/sys/devices/rmi4-00/rmi4-00.fn03/serio2
 else
   echo "Trackpoint not detected"
   exit 200
