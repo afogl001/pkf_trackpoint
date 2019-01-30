@@ -91,3 +91,5 @@
     + Fix redirection of systemd warnings when disabling persistence (can be safely ignored as timer unit is also deleted)
     + Tweak persistence detection and reporting
     + Change systemd timer from "OnBootSec" to "OnActiveSec"
+  - v1.8.2
+    + Add trackpoint path for KDE Neon 

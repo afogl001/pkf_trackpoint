@@ -35,8 +35,11 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
     + /etc/init.d/trackpoint (SysV)
     + /usr/bin/trackpoint.sh
 
-## Tested on...
-  -
+## Should work on...
+  - Ubuntu/Kubuntu (15.04 and later)
+  - OpenSUSE Leap
+  - Trisqel
+  - KDE Neon
 
 ## Exit codes
   - 100: Script not run as root (required since system file are being changed)
@@ -57,4 +60,3 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
   - Find better initialization than timer for systemd
-  - Change systemd timmer to "OnActiveSec" instead of "OnBootSec"
