@@ -94,4 +94,5 @@
   - v1.8.2
     + Add trackpoint path for KDE Neon
   - v1.8.3
-    + Fix typo in KDE Neon support 
+    + Fix typo in KDE Neon support
+    + Add systemd conditional for KDE Neon
