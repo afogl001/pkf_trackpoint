@@ -27,9 +27,14 @@ vSensitivity=$(<$vTrackpointPath/sensitivity)
 vSpeed=$(<$vTrackpointPath/speed)
 vPress_to_Select=$(<$vTrackpointPath/press_to_select)
 
+## Update template with current values (to prevent settings being changed if user uses Optoin 3 to configure persistence)
+sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
+sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
+sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
+
+
 while :
 do
-
   ## Check status of persistence
   systemctl --version &> /dev/null
   if [ $? != 0 ];
@@ -105,6 +110,10 @@ case $vMainMenu in
   echo $vSensitivity > $vTrackpointPath/sensitivity
   echo $vSpeed > $vTrackpointPath/speed
   echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  ## Update template with current values (to prevent settings being changed if user uses Optoin 3 to configure persistence)
+  sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
+  sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
+  sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
 ;;
 
 3 )
@@ -126,9 +135,6 @@ case $vMainMenu in
 4 )
 if [ "$vInitStatus" = "Enabled" ];
 then
-  sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
-  sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
-  sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
 else
   echo "Persistence not enabled.  Please run \"Option 3:\" first"

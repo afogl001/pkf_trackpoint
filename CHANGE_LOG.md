@@ -96,3 +96,5 @@
   - v1.8.3
     + Fix typo in KDE Neon support
     + Add systemd conditional for KDE Neon
+  - v1.8.4
+    + Update template with current settings at start and on setting (Option 2) to prevent settings being undone when setting persistence (Option 3)
