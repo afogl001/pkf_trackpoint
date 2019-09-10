@@ -65,7 +65,7 @@ do
 echo ""
 echo "1: Check current Trackpoint settings"
 echo "2: Set Trackpoint settings"
-echo "3: Setup persistent Trackpoint settings"
+echo "3: Setup persistent Trackpoint settings using current settings"
 echo "4: Make current Trackpoint settings persistent"
 echo "5: Remove Trackpoint persistent settings (use OS defaults)"
 echo "6: Set current Trackpoint settings back to OS defaults"
@@ -142,18 +142,29 @@ fi
 ;;
 
 5 )
-  if [ $vInitSystem = sysv ];
+  if [ $vInitSystem = sysv -a $vInitStatus = Enabled ];
   then
     update-rc.d -f trackpoint remove
     rm -f /etc/init.d/trackpoint
     rm -f /usr/bin/trackpoint.sh
-  else
+    ## Ensure current setting are not changed
+    echo $vSensitivity > $vTrackpointPath/sensitivity
+    echo $vSpeed > $vTrackpointPath/speed
+    echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  elif [ $vInitSystem = systemd -a $vInitStatus = Enabled ];
+  then
     systemctl disable trackpoint.timer
     systemctl stop trackpoint &> /dev/null  # Output hidden since it warns about service being called by timer, but timer and service are removed below
     rm -f /etc/systemd/system/trackpoint.service
     rm -f /etc/systemd/system/trackpoint.timer
     rm -f /usr/bin/trackpoint.sh
     systemctl daemon-reload
+    ## Ensure current setting are not changed
+    echo $vSensitivity > $vTrackpointPath/sensitivity
+    echo $vSpeed > $vTrackpointPath/speed
+    echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  else
+    echo "Persistence not enabled.  Please run \"Option 3:\" first"
   fi
 ;;
 
