@@ -8,7 +8,7 @@ Configure trackpoint on GNU/Linux.  This menu-driven script allows the user to
 ### Run "pkf_trackpoint.sh" to configure trackpoint.
   1. Displays current settings and persistence state
   2. Apply trackpoint settings on the fly
-  3. Enable persistent settings (does not apply settings).  User may then manually edit /usr/bin/trackpoint.sh as they desire
+  3. Enable persistent settings (using current settings).  User may then manually edit /usr/bin/trackpoint.sh as they desire
   4. Make current settings persistent
   5. Remove all pkf_trackpoint files from initialization daemon
   6. Sets trackpoint back to OS defaults (sensitivity=128, speed=97, press=0)
@@ -60,3 +60,4 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 ## TODO
   - Add support for SysV (non-Debian) & Upstart
   - Find better initialization than timer for systemd
+  - Add Trackpoint scrolling for GNOME 3

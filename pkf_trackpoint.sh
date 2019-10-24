@@ -27,9 +27,14 @@ vSensitivity=$(<$vTrackpointPath/sensitivity)
 vSpeed=$(<$vTrackpointPath/speed)
 vPress_to_Select=$(<$vTrackpointPath/press_to_select)
 
+## Update template with current values (to prevent settings being changed if user uses Optoin 3 to configure persistence)
+sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
+sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
+sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
+
+
 while :
 do
-
   ## Check status of persistence
   systemctl --version &> /dev/null
   if [ $? != 0 ];
@@ -60,7 +65,7 @@ do
 echo ""
 echo "1: Check current Trackpoint settings"
 echo "2: Set Trackpoint settings"
-echo "3: Setup persistent Trackpoint settings"
+echo "3: Setup persistent Trackpoint settings using current settings"
 echo "4: Make current Trackpoint settings persistent"
 echo "5: Remove Trackpoint persistent settings (use OS defaults)"
 echo "6: Set current Trackpoint settings back to OS defaults"
@@ -105,6 +110,10 @@ case $vMainMenu in
   echo $vSensitivity > $vTrackpointPath/sensitivity
   echo $vSpeed > $vTrackpointPath/speed
   echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  ## Update template with current values (to prevent settings being changed if user uses Optoin 3 to configure persistence)
+  sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
+  sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
+  sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
 ;;
 
 3 )
@@ -126,9 +135,6 @@ case $vMainMenu in
 4 )
 if [ "$vInitStatus" = "Enabled" ];
 then
-  sed -i "/vSensitivity=/c\vSensitivity=$vSensitivity" templates/trackpoint.sh
-  sed -i "/vSpeed=/c\vSpeed=$vSpeed" templates/trackpoint.sh
-  sed -i "/vPress_to_Select=/c\vPress_to_Select=$vPress_to_Select" templates/trackpoint.sh
   cp -r templates/trackpoint.sh /usr/bin && chmod +x /usr/bin/trackpoint.sh
 else
   echo "Persistence not enabled.  Please run \"Option 3:\" first"
@@ -136,18 +142,29 @@ fi
 ;;
 
 5 )
-  if [ $vInitSystem = sysv ];
+  if [ $vInitSystem = sysv -a $vInitStatus = Enabled ];
   then
     update-rc.d -f trackpoint remove
     rm -f /etc/init.d/trackpoint
     rm -f /usr/bin/trackpoint.sh
-  else
+    ## Ensure current setting are not changed
+    echo $vSensitivity > $vTrackpointPath/sensitivity
+    echo $vSpeed > $vTrackpointPath/speed
+    echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  elif [ $vInitSystem = systemd -a $vInitStatus = Enabled ];
+  then
     systemctl disable trackpoint.timer
     systemctl stop trackpoint &> /dev/null  # Output hidden since it warns about service being called by timer, but timer and service are removed below
     rm -f /etc/systemd/system/trackpoint.service
     rm -f /etc/systemd/system/trackpoint.timer
     rm -f /usr/bin/trackpoint.sh
     systemctl daemon-reload
+    ## Ensure current setting are not changed
+    echo $vSensitivity > $vTrackpointPath/sensitivity
+    echo $vSpeed > $vTrackpointPath/speed
+    echo $vPress_to_Select > $vTrackpointPath/press_to_select
+  else
+    echo "Persistence not enabled.  Please run \"Option 3:\" first"
   fi
 ;;
 
