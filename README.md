@@ -26,9 +26,9 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
 
 ## Files created/modified
   - Files restored every boot (do not delete)
-    + /sys/devices/platform/i8042/serio1/serio2/sensitivity
-    + /sys/devices/platform/i8042/serio1/serio2/speed
-    + /sys/devices/platform/i8042/serio1/serio2/press_to_select
+    + /sys/devices/<...>/sensitivity
+    + /sys/devices/<...>/speed
+    + /sys/devices/<...>/press_to_select
   - Files that remain between reboots (if using persistent settings)
     + /etc/systemd/system/trackpoint.service (systemd)
     + /etc/systemd/system/trackpoint.timer (systemd)
@@ -46,6 +46,8 @@ This can be useful for understanding what pkf_trackpoint is doing as well as ass
   - 200: Trackpoint not detected (or at least common Trackpoint sys directories do not appear to exist.)
 
 ## Variables used
+  - file = temporary variable used in FOR loop to capture locations of files named "press_to_select" located in /sys/devices directory
+  - dir = temporary variable used in FOR lop to capture the parent directory of each $file found
   - vTrackpointPath = Path to Trackpoint settings. Varies based on existence of a trackpad ( sys/devices/platform/i8042/serio1 | sys/devices/platform/i8042/serio1/serio2 )
   - vInitSystem = Detected initialization service used ( sysv | systemd )
   - vInitStatus = Current status of persistence ( Enabled | Disabled | Broken. Use Option 3 or 5)
