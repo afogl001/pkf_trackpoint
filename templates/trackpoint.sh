@@ -1,16 +1,16 @@
 #!/bin/bash
 
 ## Determine and set correct path for trackpoint
-if [ -f /sys/devices/platform/i8042/serio1/serio2/sensitivity ];
-then
-  vTrackpointPath=/sys/devices/platform/i8042/serio1/serio2
-elif [ -f /sys/devices/platform/i8042/serio1/sensitivity ];
-then
-  vTrackpointPath=/sys/devices/platform/i8042/serio1
-elif [ -f /sys/devices/rmi4-00/rmi4-00.fn03/serio2/sensitivity ];
-then
-  vTrackpointPath=/sys/devices/rmi4-00/rmi4-00.fn03/serio2
-else
+for file in $(find /sys/devices -name press_to_select)
+do
+  dir=$(dirname $file)
+  if [ -f $dir/speed -a -f $dir/sensitivity ]; then
+    vTrackpointPath=$dir
+    break
+  fi
+done
+
+if ! [ $vTrackpointPath ]; then
   echo "Trackpoint not detected"
   exit 200
 fi
