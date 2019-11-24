@@ -104,3 +104,7 @@
 ##### v1.9.0
   + Change Trackpoint configuration directory assignment to dynamic discovery instead of hard-coded conditional paths
   + Remove conditional path existence check in trackpoint.service since it's redundant given the check in trackpoint.sh
+#### v2.0.0
+  + Add functionality to enable/disable scrolling for evdev (libinput generally already has good scrolling).
+  + Version bump due to scenario where new file (90-trackpoint.conf) written to system with this version and cannot be removed via older versions.
+  + Minor polish of code (mostly condensing "if;then" to single line)
