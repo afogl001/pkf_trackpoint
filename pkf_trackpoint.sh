@@ -28,7 +28,7 @@ vPress_to_Select=$(<$vTrackpointPath/press_to_select)
 vScrolling="9"  # Initialize with 9 to allow test against numerical values
 
 ## Check if we need to set TrackPoint wheel
-vTrackpointXconfig=$(xinput list-props "TPPS/2 IBM TrackPoint"  2> /dev/null | grep "Evdev Wheel Emulation (")
+vTrackpointXconfig=$(xinput list-props "TPPS/2 IBM TrackPoint"  2> /dev/null | grep "Evdev Wheel Emulation (" | cut -d ' ' -f 1 | awk '{$1=$1};1')
 
 ## Determine and set correct path for X11 xorg.conf.d
 if [ $vTrackpointXconfig ]; then
@@ -53,8 +53,8 @@ do
     # Capture value for scrolling button
     vTrackpointWheelButtonValue=$(xinput list-props "TPPS/2 IBM TrackPoint" | grep "Evdev Wheel Emulation Button (" | cut -d ':' -f 2 | awk '{$1=$1};1')
     # Update template with current values to prevent them changing if persistence is enabled
-    sed -i "s/\"EmulateWheel\".*/\"EmulateWheel\"   \"${vTrackpointWheelEnabledValue}\"/" templates/90-trackpoint.conf.${vTrackpointWheelType}
-    sed -i "s/\"EmulateWheelButton\".*/\"EmulateWheelButton\"   \"${vTrackpointWheelButtonValue}\"/" templates/90-trackpoint.conf.${vTrackpointWheelType}
+    sed -i "s/\"EmulateWheel\".*/\"EmulateWheel\"   \"${vTrackpointWheelEnabledValue}\"/" templates/90-trackpoint.conf
+    sed -i "s/\"EmulateWheelButton\".*/\"EmulateWheelButton\"   \"${vTrackpointWheelButtonValue}\"/" templates/90-trackpoint.conf
     # We don't worry about axis/horz. scrolling as genrally, if scrolling, then horz, else it's not applicable
   fi
 
@@ -133,8 +133,8 @@ case $vMainMenu in
 ;;
 
 3 )
-  if [ $vTrackpointXconfig]; then
-    echo "Toggle scrolling (0 for \"No\", 1 for \"Yes\"): Currently ${vTrackpointWheelEnabledValue}"
+  if [ $vTrackpointXconfig ]; then
+    echo "Toggle scrolling (0 for \"No\", 1 for \"Yes\", [C]ancel): Currently ${vTrackpointWheelEnabledValue}"
     read vScrolling
     if [ $vScrolling = 0 ]; then
       xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 0
@@ -154,13 +154,13 @@ case $vMainMenu in
 ;;
 
 4 )
-  if [ $vTrackpointXconfig]; then
+  if [ $vTrackpointXconfig ]; then
     echo "Would you like to include scrolling settings in persistence setup?
         (0 for \"No\", 1 for \"Yes\")"
     read vScrolling
     if [ $vScrolling = 1 ]; then
       echo "Copying config file to \"${vXorgDir}\""
-      cp -r templates/90-trackpoint.conf.${vTrackpointWheelType} $vXorgDir/90-trackpoint.conf
+      cp -r templates/90-trackpoint.conf $vXorgDir/90-trackpoint.conf
     fi
   fi
 

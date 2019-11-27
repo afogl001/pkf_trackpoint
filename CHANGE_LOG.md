@@ -108,3 +108,6 @@
   + Add functionality to enable/disable scrolling for evdev (libinput generally already has good scrolling).
   + Version bump due to scenario where new file (90-trackpoint.conf) written to system with this version and cannot be removed via older versions.
   + Minor polish of code (mostly condensing "if;then" to single line)
+  - v2.0.1
+    + Fix erroneous leftovers from non-evdev scrolling work
+    + Fix missing space in conditional for scrolling option
