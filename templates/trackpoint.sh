@@ -17,7 +17,7 @@ fi
 
 ## Set trackpoint setting variable values
 vSensitivity=128
-vSpeed=92
+vSpeed=97
 vPress_to_Select=0
 
 ## Apply settings based on option "start" or "stop" being passed
